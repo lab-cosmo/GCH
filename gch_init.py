@@ -3,6 +3,7 @@ import numpy as np
 import os
 import shutil
 import json
+import sys
 # Make it work for Python 2+3 and with Unicode
 import io
 
@@ -36,11 +37,10 @@ def gch_init(pk,pnrg,setxyz,wdir_local,s_c,s_e,ndim,numref,numshaken,conv,mode):
     wdir = cwd + '/' + wdir_local
     print(wdir)
     try:
-        shutil.rmtree(wdir)
         os.mkdir(wdir)
-    except:
-        os.mkdir(wdir)
-
+    except FileExistsError:
+        print('Error: Risk of overwriting - wdir cannot be an existing directory')
+        sys.exit()
     # Builds an energy + kpca matrix [en kp_1 kp_2 kp_3 .... kp_npca]
     # To be refined into a more compact form
     npca         = 32
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     parser.add_argument("kernel", help="Kernel file")
     parser.add_argument("-nrg", help="Molar energy file, has to be as long as the number of rows of kernel")
     parser.add_argument("-ixyz", help="libatoms formatted xyz file of dataset")
-    parser.add_argument("-wdir",type=str,default='./',help="Directory where to put the shaken subfolder")
+    parser.add_argument("-wdir",type=str,default='tmp',help="Directory where to put the shaken subfolder")
     parser.add_argument("-sc",type=float,default=0.001,help="Cartesian uncertainty in units of measure (default is 1e-3). n.b. Referred to the units used in the dataset (default Angstrom).")
     parser.add_argument("-se",type=float,default=0.01,help="Energetic uncertainty in units of measure (default is 1e-2). n.b. Referred to the units used for the energies (default meV).")
     parser.add_argument("--ndim",type=int,default=2,help="Specify the dimensionality for hull construction, default is 1 dimensional (E vs KPCA1)")

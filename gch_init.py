@@ -3,6 +3,7 @@ import numpy as np
 import os
 import shutil
 import json
+import sys
 # Make it work for Python 2+3 and with Unicode
 import io
 
@@ -38,8 +39,8 @@ def gch_init(pk,pnrg,setxyz,wdir_local,s_c,s_e,ndim,numref,numshaken,conv,mode):
     try:
         os.mkdir(wdir)
     except FileExistsError:
-        print('Warning: Risk of overwriting - files will be written to an existing directory')
-
+        print('Error: Risk of overwriting - wdir cannot be an existing directory')
+        sys.exit()
     # Builds an energy + kpca matrix [en kp_1 kp_2 kp_3 .... kp_npca]
     # To be refined into a more compact form
     npca         = 32

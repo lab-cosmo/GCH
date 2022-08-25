@@ -1,0 +1,1 @@
+Input parameters for gch are : wdir = /home/jmartin/make_examples/folder_of_examples_fixed/example_outputs , sigma_c = 0.001 , sigma_e = 0.01 , nref = 10,     nshaken = 10, inrg = 0, ndim = [0 1], convergence_threshold = 0.25      

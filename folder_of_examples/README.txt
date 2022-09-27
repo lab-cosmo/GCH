@@ -24,13 +24,11 @@ Starting in a directory containing atleast the files 'gch_init.py', 'gch_run.py'
 
 Copy files 2-4 and file 6 into your starting directory and run the command: 
 
-python gch_init.py example_kernel.ker -ixyz example_set.xyz -nrg exanple_energies.txt --nshake 10 --nref 10 -wdir [output folder name] 
+python3 gch_init.py example_kernel.ker -ixyz example_set.xyz -nrg example_energies.txt --nshake 10 --nref 10 -wdir [output folder name] 
 
  ([output folder name] is the name you wish to give to your output folder. This can be whatever you choose, but must not already be an existing sub-directory.)
 
 
-
-:wq:wq
 When this has finished, go to the output folder to check that it is generating the expected files - it should have the appearance of 5) 
 
 Return to your starting directory and run the command: python gch_run.py example_shaken_kernel.ker -wdir [output folder name]

@@ -14,85 +14,15 @@ import sys
 from skcosmo.decomposition import PCovR
 from sklearn.decomposition import PCA
 from skcosmo.preprocessing import StandardFlexibleScaler
-from zipfile import ZipFile
 import os
 
 
-
-
-
-#establish lists to hold the atoms objects and the energies
-struct=[]
-atom_energy=[]
-
-#establish variables needed to convert from kJ/mol structure energies to a.u energy per atom
-avagadro = 6.0221409E23
-molecule_atoms=24
-conversion = 6.242E24
-
 ########################################################################################################################################
 
-#This section is used to convert our group's style res files into atoms objects, create the extended xyz file and get the atom energies
+#This section is used to read the xyz file into a list of ase atoms objects
 
 #########################################################################################################################################
-with ZipFile('example_set.zip','r') as structures_zip:
-    #get list of filenames
-    structure_list = structures_zip.namelist()
-
-
-    for structure in structure_list:
-    #extract the spacegroup info from the filename
-       spacegroup = structure.split('-')
-       spacegrp = int(spacegroup[2])
-
-    #unzip and open the file to be worked with
-       structures_zip.extract(structure)
-       file = open(structure, "r")
-
-    #read the file and edit the lines to add zeros columns and remove the numbers from the element coloumn
-       lines = file.readlines()
-    #Read in total energy from top line, convert to meV per atom and add to list
-       energy_line = lines[0].split()
-       total_energy = energy_line[2]
-       atoms_energy = (float(total_energy)/((avagadro)*(molecule_atoms)))*conversion
-       atom_energy.append(atoms_energy)
-    #identify where co-ordinate part begins-i.e which lines to edit
-       search = 'SFAC'
-       one_less = [lines.index(line) for line in lines if search in line]
-       start = one_less[0] + 1
-    #looping over coordinate section of lines to be edited
-       for i in range(start,(len(lines))):
-    
-           col_list = (lines[i]).split()
-        #take only the first character from column 1 - to get rid of the numbers
-           col_list[0]= (col_list[0])[0:1]
-        #add two columns of zeros
-           col_list.append(0)
-           col_list.append(0)
-        #make a complete line again
-           str_col_list = [str(element) for element in col_list]
-           lines[i]= " ".join(str_col_list) + "\n"
-       #write the new edited file content back into the original file
-       file = open(structure, "w")
-       file.writelines(lines)
-       file.close()
-       
-
-       #Read the structure into ase to get atoms object
-       atom_struc = aseio.read(structure)
-       #add the spacegroup info and use crystal structure to apply bulk/crystal info to the releavant atoms object
-       atom_struc = crystal(symbols=atom_struc,spacegroup=spacegrp,pbc=True)
-       #write atoms object to the list of structures and to the main file
-       struct.append(atom_struc)
-       ase.io.write('test_set.xyz',images=atom_struc,append=True)
-       #remove the extracted file to save space
-       os.remove(structure)
-
-structures_zip.close()
-
-#Save the per atom energies to file
-energy_array = np.array(atom_energy)
-np.savetxt('test_energies.txt',energy_array)
+struct = aseio.read('example_set.xyz',index=':')
 
 ####################################################################################################################################
 

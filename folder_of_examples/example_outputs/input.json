@@ -1,0 +1,13 @@
+{
+    "convergence_threshold": 0.25,
+    "inrg": 0,
+    "ndim": 2,
+    "nref": 10,
+    "nshaken": 10,
+    "pnrg": "/home/jmartin/make_examples/folder_of_examples_fixed/example_energies.txt",
+    "ref_kernel": "/home/jmartin/make_examples/folder_of_examples_fixed/example_normalised_kernel.ker",
+    "setxyz": "/home/jmartin/make_examples/folder_of_examples_fixed/example_set.xyz",
+    "sigma_c": 0.001,
+    "sigma_e": 0.01,
+    "wdir": "/home/jmartin/make_examples/folder_of_examples_fixed/example_outputs"
+}

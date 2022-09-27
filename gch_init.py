@@ -116,7 +116,7 @@ if __name__ == '__main__':
     parser.add_argument("--ndim",type=int,default=2,help="Specify the dimensionality for hull construction, default is 1 dimensional (E vs KPCA1)")
     parser.add_argument("--nref",type=int,default=50,help="Number of references to be extracted to build the uncertainties on (default 50 structures, 100 is a good guess in general")
     parser.add_argument("--nshake",type=int,default=50,help="Number of shaken repetitions on ref structures (default 50, it's plenty already)")
-    parser.add_argument("--conv",type=float,default=0.25,help="Number of samples hulls to build, given by 1/conv ( default is 0.25, corresponding to 400 hulls)")
+    parser.add_argument("--conv",type=float,default=0.25,help="Number of samples hulls to build, given by 100/conv ( default is 0.25, corresponding to 400 hulls)")
     parser.add_argument("--mode",type=str,default="random",help="Selection criteria for points to be shaken : \
     ['random' for random choice or 'fps' for a farthest point sampling based choice ] (Default random, use fps for sparser sampling) ")
 

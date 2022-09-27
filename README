@@ -27,8 +27,8 @@ The remaining options determine the sensitivity of the construction and are hype
 
 Once you have generated the folder "wdir", check inside and find the shaketraj.xyz, you will need that to compute 
 the last element needed to run the gch with : shaketraj.ker .
-Use your kernel calculator to produce a kernel matrix of similarity between the nshaken*nref rattled structures and your
-set structures, it will have (nshaken*nref) * N entries.
+Use your kernel calculator to produce a kernel matrix of similarity between the (nshaken + 1) *nref rattled structures and your
+set structures, it will have ((nshaken + 1)*nref) * N entries.
 
 Pass only the wdir and the freshly calculated shaketraj.ker to the gch_run.py to start the gch sampling.
 The outputs "vprobprune.dat" and "vlist.dat"  will be stored in wdir, and will contain respectively :

@@ -1,6 +1,11 @@
+> [!CAUTION]
+> This code is deprecated! If you want to construct GCH, please use `DirectionalConvexHull` in [skmatter](https://github.com/scikit-learn-contrib/scikit-matter)
+
+------------------------------
+
 The Generalised Convex Hull suite contains 4 scripts written in python, which depend on :
 
-####### DEPENDENCIES #######
+# DEPENDENCIES
 
 - ASE (for the generation of the "rattled" structures
 - scipy
@@ -12,7 +17,7 @@ The Generalised Convex Hull suite contains 4 scripts written in python, which de
 - json
 - shutil (can be removed, down the line)
 
-####### HOW TO USE #########
+# HOW TO USE
 
 The current implementations expects the user to be able to produce autonomously similarity kernels
 between structural datasets (A.xyz and B.xyz).
@@ -37,7 +42,7 @@ vproborune.dat : List of probabilities of each structures of being vertex at eve
 vlist 	       : List of vertices found when all vertices have at least 50% chance of being a vertex 
 
 
-##### IN THE FOLDER #####
+# IN THE FOLDER
 
 You will find, besides gch_init and gch_run , also lib_gch and gch_utils. They contain functions useful for the GCH framework constructions,
 that you may want to explore in case you're feeling adventurous.
